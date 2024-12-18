@@ -5,7 +5,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const Image = require('../models/Image')
-
+const { Op } = require("sequelize");
 exports.getAllProducts = async (req, res) => {
     try {
         const products = await Product.findAll({ include: Brand });
@@ -126,5 +126,68 @@ exports.deleteProduct = async (req, res) => {
     } catch (error) {
         console.error('Lỗi khi xóa sản phẩm:', error);
         res.status(500).json({ error: error.message });
+    }
+};
+//
+exports.getProductDetails = async (req, res) => {
+    try {
+      const { id } = req.params; // Lấy id từ URL
+      const product = await Product.findByPk(id, {
+        include: [Brand, Specification]  
+      });
+  
+      if (!product) {
+        return res.status(404).json({ message: 'Sản phẩm không tìm thấy' });
+      }
+  
+      res.json(product); 
+    } catch (error) {
+      console.error('Lỗi khi lấy thông tin sản phẩm:', error);
+      res.status(500).json({ error: error.message });
+    }
+  };
+// Thêm vào phần các route của bạn
+exports.searchProducts = async (req, res) => {
+    const query = req.query.q; // Lấy từ khóa tìm kiếm từ query string
+    try {
+      const results = await Product.findAll({
+        where: {
+          ProductName: {
+            [Op.like]: `%${query}%` // Sử dụng Op.like thay cho $like
+          },
+        },
+      });
+      res.json(results);
+    } catch (error) {
+      console.error("Lỗi tìm kiếm:", error); // Log chi tiết lỗi
+      res.status(500).json({ message: "Lỗi khi tìm kiếm sản phẩm", error });
+    }
+  };
+  //Hiện thông số kĩ thuật
+  exports.getProductSpecifications = async (req, res) => {
+    try {
+        const { productId } = req.params; // Lấy productId từ URL
+
+        // Tìm tất cả các thông số kỹ thuật dựa trên ProductId
+        const specifications = await Specification.findAll({
+            where: { ProductId: productId },
+        });
+
+        if (specifications.length === 0) {
+            return res.status(404).json({
+                message: 'Không có thông số kỹ thuật nào cho sản phẩm này.',
+            });
+        }
+
+        res.json({
+            message: 'Thông số kỹ thuật của sản phẩm',
+            data: specifications,
+        });
+    } catch (error) {
+        console.error('Lỗi khi lấy thông số kỹ thuật:', error);
+        res.status(500).json({
+            error: 'Lỗi khi lấy thông số kỹ thuật của sản phẩm',
+            details: error.message,
+        });
     }
 };
