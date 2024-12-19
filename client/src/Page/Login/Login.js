@@ -1,6 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import '../User/Login.css'
+import '../Login/Login.css'
 const Login =()=>{
     return(
       <div className="container">

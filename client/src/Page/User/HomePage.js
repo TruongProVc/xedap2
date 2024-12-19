@@ -178,8 +178,8 @@ const Content = () => {
                           <div className="content-left">
                             <h6 className="title">
                             <Link to={`/productdetails/${product.ProductId}`}>
-                                {product.ProductName}
-                              </Link>
+                            {product.ProductName.split(' ').slice(0, 4).join(' ')}{product.ProductName.split(' ').length > 6 ? '...' : ''}
+                            </Link>
                             </h6>
                             <ul className="review-star">
                               {[...Array(5)].map((_, index) => (
@@ -214,7 +214,7 @@ const Content = () => {
                 <div className="section-content-gap">
                   <div className="secton-content">
                     <h3 className="section-title">XE ĐẠP ĐUA</h3>
-                    <p><Link href='/AllItem'>Tất cả sản phẩm</Link></p>
+                    <p><Link to='/AllItem'>Tất cả sản phẩm</Link></p>
                   </div>
                 </div>
               </div>
@@ -228,25 +228,31 @@ const Content = () => {
           <div className="container">
             <div className="row">
               <div className="col-12">
-                {/* Product Items for Race Bikes */}
+                {/* Product Items */}
                 <div className="row">
-                  {products.slice(0, 4).map((bike) => (
-                    <div key={bike.ProductId} className="col-12 col-md-3 mb-4">
-                      <div className="product-default-single-item product-color--blue">
+                  {products.slice(0,4).map((product) => (
+                    <div key={product.ProductId} className="col-12 col-md-3 mb-4">
+                      <div className="product-default-single-item product-color--pink">
                         <div className="image-box">
-                          <a href="product-details-default.html" className="image-link">
-                            <img src={products.Avatar} />
-                          </a>
-                          {bike.tag && (
+                        <Link
+                            to={`/productdetails/${product.ProductId}`}
+                            className="image-link"
+                          >
+                            <img
+                            src={`http://localhost:3000/uploads/${product.Avatar}`} // Đường dẫn ảnh
+                            alt={product.ProductName}
+                            />
+                          </Link>
+                          {product.tag && (
                             <div className="tag">
-                              <span>{products.tag}</span>
+                              <span>{product.tag}</span>
                             </div>
                           )}
                           <div className="action-link">
                             <div className="action-link-left">
-                              <a href="#" data-bs-toggle="modal" data-bs-target="#modalAddcart">
+                            <Link to={`/productdetails/${product.ProductId}`}>
                                 Add to Cart
-                              </a>
+                              </Link>
                             </div>
                             <div className="action-link-right">
                               <a href="#" data-bs-toggle="modal" data-bs-target="#modalQuickview">
@@ -264,18 +270,20 @@ const Content = () => {
                         <div className="content">
                           <div className="content-left">
                             <h6 className="title">
-                              <a href="product-details-default.html">{bike.ProductName}</a>
+                            <Link to={`/productdetails/${product.ProductId}`}>
+                            {product.ProductName.split(' ').slice(0, 4).join(' ')}{product.ProductName.split(' ').length > 6 ? '...' : ''}
+                            </Link>
                             </h6>
                             <ul className="review-star">
                               {[...Array(5)].map((_, index) => (
-                                <li className={index < bike.stars ? 'fill' : 'empty'} key={index}>
+                                <li className={index < product.stars ? 'fill' : 'empty'} key={index}>
                                   <i className="ion-android-star" />
                                 </li>
                               ))}
                             </ul>
                           </div>
                           <div className="content-right">
-                            <span className="price">{products.Price}</span>
+                            <span className="price">{Number(product.Price).toLocaleString()} VNĐ</span>
                           </div>
                         </div>
                       </div>

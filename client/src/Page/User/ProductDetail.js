@@ -52,7 +52,7 @@ const ProductDetails = () => {
 
 return (
   <>
-    <div className="breadcrumb-section">
+    <div className="breadcrumb-section breadcrumb-bg-color--golden">
       <div className="breadcrumb-wrapper">
         <div className="container">
           <div className="row">
@@ -64,7 +64,6 @@ return (
                     <li>
                       <a href="index.html">Trang chủ - Chi tiết sản phẩm </a>
                     </li>
-                   
                   </ul>
                 </nav>
               </div>
@@ -86,15 +85,16 @@ return (
             >
               {/* Start Large Image */}
               <div className="product-large-image product-large-image-horaizontal swiper-container">
-                <div className="swiper-wrapper">
-                  <div className="product-image-large-image   ">
+              <div className="swiper-wrapper">
+                <div className="product-image-large-image">
                   <img
                     src={`http://localhost:3000/uploads/${productdetails.Avatar}`} // Đường dẫn ảnh
                     alt={productdetails.ProductName}
                   />
-                  </div>
                 </div>
               </div>
+            </div>
+
               {/* End Large Image */}
               {/* Start Thumbnail Image */}
               <div className="product-image-thumb product-image-thumb-horizontal swiper-container "></div>

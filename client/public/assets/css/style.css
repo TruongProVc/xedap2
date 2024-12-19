@@ -15485,6 +15485,9 @@ input {
 }
 .product-default-single-item .content-left .title a {
     color: #24262b;
+    white-space: nowrap; /* Prevents text from wrapping to the next line */
+    overflow: hidden; /* Hides overflowed text */
+    text-overflow: ellipsis; /* Adds ellipsis if text is too long */
 }
 .product-default-single-item .content-right .price del {
     padding-right: 10px;
@@ -16482,7 +16485,7 @@ a.ui-button:active,
 }
 
 .breadcrumb-bg-color--golden {
-    background-color: #FEF5EF;
+    background-color: #e9e9e9;
 }
 
 .breadcrumb-nav-color--black li a {
@@ -19164,10 +19167,15 @@ Pages - Contact
 }
 
 .price {
-    font-size: 18px;
+    font-size: 15px;
     color: #333;
-    margin: 0;
+    margin: 12;
+    white-space: nowrap;
+    overflow: hidden; 
+    color: #c42241;
+    text-overflow: ellipsis; 
 }
+
 
 .name {
     font-size: 16px;
@@ -19494,4 +19502,5 @@ Pages - Contact
     grid-template-columns: repeat(5, 1fr); /* Hiển thị 5 sản phẩm trên mỗi hàng */
     gap: 20px; /* Tăng khoảng cách giữa các sản phẩm */
   }
+  
   

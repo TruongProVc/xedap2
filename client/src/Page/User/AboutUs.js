@@ -2,7 +2,7 @@ import React from "react";
 const AboutUs =()=>{
     return(
         <>
-          <div className="breadcrumb-section ">
+          <div className="breadcrumb-section breadcrumb-bg-color--golden">
             <div className="breadcrumb-wrapper">
                 <div className="container">
                     <div className="row">

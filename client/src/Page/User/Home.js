@@ -15,9 +15,7 @@ const Home =()=>{
             <Header />
             <div>
                 <Routes>
-                    {/* Route mặc định chuyển hướng đến HomePage */}
                     <Route path="/" element={<Navigate to="/home" />} />
-                    
                     <Route path="/home" element={<HomePage />} />
                     <Route path="/productdetails/:id" element={<ProductDetail />} />
                     <Route path="/AllItem" element={<ALlProduct />} />
